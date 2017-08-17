@@ -1,0 +1,17 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <title>D3 Test</title>
+    <script style="text/javascript" src="d3/d3.v3.js"></script>
+</head>
+<body>
+    <script type="text/javascript">
+        // Chaining Methods
+        d3.select("body").append("p").text("D3 attaching p element plus text node to DOM");
+        // Going Chainless
+        var body = d3.select("body");
+        var h = body.append("h1");
+        h.text("this is without Chaining!")
+    </script>
+</body>
+</html>
