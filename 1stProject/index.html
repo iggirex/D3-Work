@@ -16,97 +16,33 @@
 <body>
 
     <script type="text/javascript">
-        var dataset = [25, 7, 5, 26, 11, 8, 25, 14, 23, 19, 14, 11, 22, 29, 11, 12, 13, 17, 18, 10, 24, 18, 25, 9, 3];
-        d3.select("body").selectAll("div")
-            .data(dataset)
-            .enter()
-            .append("div")
-            //.text(function (d) { return d; })  // This makes the bar chart go upside down  ???
-            .attr("class", "bar")
-            .style("height", function (d) {
-                var barHeight = 5 * d;
-                return barHeight + "px";
-            })
+        var dataset = [5, 10, 15, 20, 25];
 
-        var holder = d3.selectAll("p")
-        console.log("This is holder: ", holder[0]);
-        //console.log(d3.selectAll("p"))
+        var w = 500;
+        var h = 50;
+        var svg = d3.select("body")
+                    .append("svg")
+                    .attr("width", w)
+                    .attr("height", h);
+
+        var circles = svg.selectAll("circle")
+                        .data(dataset)
+                        .enter()
+                        .append("circle");
+        circles.attr("cx", function (d, i) {
+            return (i * 50) + 25;
+        })
+            .attr("cy", h / 2)
+            .attr("r", function (d) {
+                return d;
+            })
+            .attr("fill", "yellow")
+            .attr("stroke", "orange")
+            .attr("stroke-width", function (d) {
+                return d / 2;
+            });
+        console.log(i)
     </script>
 
 </body>
 </html>
-
-
-
-<!--<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <title>D3: Setting div heights from data</title>
-    <script type="text/javascript" src="../d3/d3.v3.js"></script>
-    <style type="text/css">
-        div.bar {
-            display: inline-block;
-            width: 20px;
-            height: 75px; /* Gets overriden by D3-assigned height below */
-            background-color: teal;
-        }
-    </style>
-</head>
-<body>
-    <script type="text/javascript">
-
-        var dataset = [5, 10, 15, 20, 25];
-
-        d3.select("body").selectAll("div")
-            .data(dataset)
-            .enter()
-            .append("div")
-            .attr("class", "bar")
-            .style("height", function (d) {
-                return d + "px";
-            });
-
-    </script>
-</body>
-</html>-->
-
-
-
-
-
-<!--<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <title>D3 Demo: Making a bar chart with divs</title>
-    <script type="text/javascript" src="d3/d3.v3.js"></script>
-    <style type="text/css">
-        div.bar {
-            display: inline-block;
-            width: 20px;
-            height: 75px; /* Gets overriden by D3-assigned height below */
-            margin-right: 2px;
-            background-color: teal;
-        }
-    </style>
-</head>
-<body>
-    <script type="text/javascript">
-
-        var dataset = [5, 10, 13, 19, 21, 25, 22, 18, 15, 13,
-            11, 12, 15, 20, 18, 17, 16, 18, 23, 25];
-
-        d3.select("body").selectAll("div")
-            .data(dataset)
-            .enter()
-            .append("div")
-            .attr("class", "bar")
-            .style("height", function (d) {
-                var barHeight = d * 5;
-                return barHeight + "px";
-            });
-
-    </script>
-</body>
-</html>-->
