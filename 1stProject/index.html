@@ -5,13 +5,31 @@
     <script style="text/javascript" src="d3/d3.v3.js"></script>
 </head>
 <body>
+
+    <div style="display: inline-block;
+                width: 20px;
+                height: 75px;
+                background-color: teal;"></div>
+
     <script type="text/javascript">
-        // Chaining Methods
-        d3.select("body").append("p").text("D3 attaching p element plus text node to DOM");
-        // Going Chainless
-        var body = d3.select("body");
-        var h = body.append("h1");
-        h.text("this is without Chaining!")
+        var dataset = [5, 10, 15, 20, 25];
+        d3.select("body").selectAll("p")
+            .data(dataset)
+            .enter()
+            .append("p")
+            .text(function (d) { return d; })
+            .style("color", function (d) {
+                if (d < 15) {
+                    return "red";
+                } else {
+                    return "black";
+                }
+            });
+
+        var holder = d3.selectAll("p")
+        console.log("This is holder: ", holder[0]);
+        //console.log(d3.selectAll("p"))
     </script>
+
 </body>
 </html>
