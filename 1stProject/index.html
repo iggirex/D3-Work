@@ -9,6 +9,7 @@
             width: 20px;
             height: 75px;
             background-color: teal;
+            margin-right: 2px;
         }
     </style>
 </head>
@@ -23,9 +24,9 @@
             //.text(function (d) { return d; })  // This makes the bar chart go upside down  ???
             .attr("class", "bar")
             .style("height", function (d) {
-                return d + "px";
+                var barHeight = 5 * d;
+                return barHeight + "px";
             })
-            .text(function (d) { return d;})
 
         var holder = d3.selectAll("p")
         console.log("This is holder: ", holder[0]);
