@@ -17,8 +17,12 @@
 
     <script type="text/javascript">
         var w = 500;
-        var h = 50;
-        var dataset = [5, 10, 15, 20, 25];
+        var h = 500;
+        var barPadding = 1
+        var dataset = [5, 18, 3, 29, 20, 15, 1, 18, 14, 25, 6, 13, 4,
+            20, 10, 15, 20, 25, 13, 20, 19, 1, 2, 3, 4, 90, 2, , 10, 15,
+            20, 25, 13, 5, 18, 3, 29, 20, 15, 1, 18, 14, 25, 6, 13, 4, 20];
+
         var svg = d3.select("body")
                     .append("svg")
                     .attr("width", w)
@@ -29,13 +33,22 @@
             .enter()
             .append("rect")
             .attr("x", function (d, i) {
-                return i * 21;
+                return i * (w/dataset.length);
             })
-            .attr("y", 0)
-            .attr("width", 20)
-            .attr("height", 100);
+            .attr("y", function (d) {
+                return h - d;
+            })
+            .attr("width", w / dataset.length - barPadding)
+            .attr("height", function (d) {
+                return d;
+            });
 
-        // This below is SVG colored circles commit
+    </script>
+
+</body>
+</html>
+
+        <!--// This below is JS, SVG colored circles commit
 
         //var dataset = [5, 10, 15, 20, 25];
         //var w = 500;
@@ -60,8 +73,4 @@
         //    .attr("stroke", "orange")
         //    .attr("stroke-width", function (d) {
         //        return d / 2;
-        //    });
-    </script>
-
-</body>
-</html>
+        //    });-->
