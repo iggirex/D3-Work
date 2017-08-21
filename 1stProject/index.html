@@ -17,11 +17,10 @@
 
     <script type="text/javascript">
         var w = 500;
-        var h = 500;
+        var h = 100;
         var barPadding = 1
         var dataset = [5, 18, 3, 29, 20, 15, 1, 18, 14, 25, 6, 13, 4,
-            20, 10, 15, 20, 25, 13, 20, 19, 1, 2, 3, 4, 90, 2, , 10, 15,
-            20, 25, 13, 5, 18, 3, 29, 20, 15, 1, 18, 14, 25, 6, 13, 4, 20];
+            20, 10, 15, 20, 25, 13, 20, 19, 1, 4, 2, 10, 15];
 
         var svg = d3.select("body")
                     .append("svg")
@@ -36,12 +35,33 @@
                 return i * (w/dataset.length);
             })
             .attr("y", function (d) {
-                return h - d;
+                return h - d * 3;
             })
             .attr("width", w / dataset.length - barPadding)
             .attr("height", function (d) {
+                return d * 3;
+            })
+            .attr("fill", function (d) {
+                return "rgb(0, 0, " + (d * 10) + ")"
+            })
+
+        svg.selectAll("text")
+            .data(dataset)
+            .enter()
+            .append("text")
+            .text(function (d) {
                 return d;
-            });
+            })
+            .attr("x", function (d, i) {
+                return i * (w / dataset.length) + (w / dataset.length - barPadding) / 2;
+            })
+            .attr("y", function (d) {
+                return h - (d * 3) + 12;
+            })
+            .attr("font-family", "sans-serif")
+            .attr("font-size", "11px")
+            .attr("fill", "white")
+            .attr("text-anchor", "middle")
 
     </script>
 
