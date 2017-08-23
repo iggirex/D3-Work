@@ -76,7 +76,18 @@
         d3.select("p")
             .on("click", function () {
                 dataset = [20, 19, 15, 10, 13, 23, 25, 5, 9, 8,
-                           10, 17, 12, 22, 11, 4, 5, 2, 19, 8]
+                    10, 17, 12, 22, 11, 4, 5, 2, 19, 8]
+
+                var numValues = dataset.length;
+                dataset = [];
+                for (var i = 0; i < numValues; i++) {
+                    var newNumber = Math.floor(Math.random() * 100);
+                    dataset.push(newNumber);
+                }
+
+                yScale = d3.scale.linear()
+                           .domain([0, d3.max(dataset)])
+                           .range([0, h])
 
                 svg.selectAll("rect")
                     .data(dataset)
