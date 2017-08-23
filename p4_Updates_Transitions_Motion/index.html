@@ -81,7 +81,11 @@
                 svg.selectAll("rect")
                     .data(dataset)
                     .transition()
-                    .duration(1000)
+                    .delay(function (d, i) {
+                        return i * 100;
+                    })
+                    .duration(3000)
+                    .ease("bounce")
                     .attr("y", function (d, i) {
                         return h - yScale(d);
                     })
