@@ -92,11 +92,11 @@
                 svg.selectAll("rect")
                     .data(dataset)
                     .transition()
-                    //.delay(function (d, i) {
-                    //    return i * 100;
-                    //})
+                    .delay(function (d, i) {
+                        return i * 100;
+                    })
                     .duration(3000)
-                    .ease("cubic-in-out")
+                    .ease("bounce")
                     .attr("y", function (d, i) {
                         return h - yScale(d);
                     })
