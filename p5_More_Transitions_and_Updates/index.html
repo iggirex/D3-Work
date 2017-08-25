@@ -130,6 +130,7 @@
                     .data(dataset)
                     .transition()
                     .duration(1000)
+                    .ease("cubic-in-out")
                     .each("start", function () {
                         d3.select(this)
                             .attr("fill", "magenta")
