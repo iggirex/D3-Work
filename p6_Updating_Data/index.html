@@ -16,6 +16,7 @@
 <body>
 
     <p>Click here to update dataset</p>
+    <div>Click here to REMOVE items</div>
 
     <script type="text/javascript">
         var w = 600;
@@ -73,6 +74,65 @@
             .attr("fill", "white")
             .attr("text-anchor", "middle")
 
+        d3.select("div")
+            .on("click", function () {
+                dataset.shift()
+
+                xScale.domain(d3.range(dataset.length));
+                yScale.domain([0, d3.max(dataset)]);
+
+                var bars = svg.selectAll("rect")
+                    .data(dataset);
+
+                bars.enter()
+                    .append("rect")
+                    .attr("x", w)
+                    .attr("y", function (d) {
+                        return h - yScale(d);
+                    })
+                    .attr("width", xScale.rangeBand())
+                    .attr("height", function (d) {
+                        return yScale(d);
+                    })
+                    .attr("fill", function (d) {
+                        return "rgb(0, 0, " + (d * 10) + ")";
+                    })
+
+                bars.transition()
+                    .duration(500)
+                    .attr("x", function (d, i) {
+                        return xScale(i);
+                    })
+                    .attr("y", function (d) {
+                        return h - yScale(d);
+                    })
+                    .attr("width", xScale.rangeBand())
+                    .attr("height", function (d) {
+                        return yScale(d);
+                    })
+
+                bars.exit()
+                    .transition()
+                    .duration(500)
+                    .attr("x", w)
+                    .remove()
+                })
+
+                svg.selectAll("text")
+                    .data(dataset)
+                    .transition()
+                    .duration(500)
+                    .text(function (d) {
+                        return d;
+                    })
+                    .attr("x", function (d, i) {
+                        return xScale(i) + xScale.rangeBand() / 2;
+                    })
+                    .attr("y", function (d) {
+                        return h - yScale(d) + 14
+                    })
+                    
+
         d3.select("p")
             .on("click", function () {
                 //dataset = [20, 19, 15, 10, 13, 23, 25, 5, 9, 8,
@@ -95,6 +155,8 @@
 
                 var texts = svg.selectAll("text")
                     .data(dataset);
+
+                console.log("earlier", texts)
 
                 bars.enter()
                     .append("rect")
