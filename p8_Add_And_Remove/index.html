@@ -108,16 +108,28 @@
             .attr("fill", "white")
             .attr("text-anchor", "middle")
 
+        var sortOrder = false;
+
         var sortBars = function () {
+
+            sortOrder = !sortOrder;
 
             svg.selectAll("rect")
                 .sort(function (a, b) {
-                    return d3.ascending(a.value, b.value);
+                    if (sortOrder) {
+                        return d3.ascending(a.value, b.value);
+                    } else {
+                        return d3.ascending(b.value, a.value);
+                    }
+                    
                 })
                 .transition()
                 .duration(1000)
                 .attr("x", function (d, i) {
                     return xScale(i);
+                })
+                .delay(function (d, i) {
+                    return i * 50;
                 })
         };
 
