@@ -8,13 +8,14 @@
     <script type="text/javascript">
 
         console.log("hey")
-        var w = 300;
-        var h = 300;
+        var w = 1900;
+        var h = 1100;
 
         var svg = d3.select("body")
+                    .append("svg")
                     .attr("width", w)
                     .attr("height", h)
-                    .append("svg")
+             
 
         var colors = d3.scale.category10();
 
